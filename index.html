@@ -46,7 +46,7 @@
         );
     this.load.spritesheet('personaje', 
         'assets/personaje.png',
-        { frameWidth: 17, frameHeight: 25 }
+        { frameWidth: 17, frameHeight: 25, endFrame:24 }
     );
     }
 
@@ -74,7 +74,7 @@ function create ()
 
     player.setBounce(0.2);
     player.setCollideWorldBounds(true);
-    this.physics.add.collider("personaje", "platform");
+    this.physics.add.collider(player, platforms);
 
      this.anims.create({
             key: 'left',
