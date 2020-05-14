@@ -57,15 +57,15 @@
 function create ()
 {
     var image1 = this.add.image(400, 300, 'plx-1');
-    image1.setScale(2, 2);
+    image1.setScale(2.8, 2.8);
     var image2 = this.add.image(400, 300, 'plx-2');
-    image2.setScale(2, 2);
+    image2.setScale(2.8, 2.8);
     var image3 = this.add.image(400, 300, 'plx-3');
-    image3.setScale(2, 2);
+    image3.setScale(2.8, 2.8);
     var image4 = this.add.image(400, 300, 'plx-4');
-    image4.setScale(2, 2);
+    image4.setScale(2.8, 2.8);
     var image5 = this.add.image(400, 300, 'plx-5');
-    image5.setScale(2, 2);
+    image5.setScale(2.8, 2.8);
 
 
     platforms = this.physics.add.staticGroup();
@@ -76,7 +76,7 @@ function create ()
     platforms.create(50, 250, 'platform');
     platforms.create(750, 220, 'platform');
 
-    player = this.physics.add.sprite(100, 450, 'personaje');
+    var image6 = player = this.physics.add.sprite(100, 450, 'personaje');image6.setScale(2.5, 2.5);
    
 
     player.setBounce(0.2);
