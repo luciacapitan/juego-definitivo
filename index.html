@@ -47,18 +47,25 @@
     this.load.spritesheet('personaje', 
         'assets/personaje.png',
         { frameWidth: 24, frameHeight: 20, endFrame:24 }
-    );
+        );
+    
+        
     }
-
+    
     var platforms;
 
 function create ()
 {
-    this.add.image(400, 300, 'plx-1');
-    this.add.image(400, 300, 'plx-2');
-    this.add.image(400, 300, 'plx-3');
-    this.add.image(400, 300, 'plx-4');
-    this.add.image(400, 300, 'plx-5');
+    var image1 = this.add.image(400, 300, 'plx-1');
+    image1.setScale(2, 2);
+    var image2 = this.add.image(400, 300, 'plx-2');
+    image2.setScale(2, 2);
+    var image3 = this.add.image(400, 300, 'plx-3');
+    image3.setScale(2, 2);
+    var image4 = this.add.image(400, 300, 'plx-4');
+    image4.setScale(2, 2);
+    var image5 = this.add.image(400, 300, 'plx-5');
+    image5.setScale(2, 2);
 
 
     platforms = this.physics.add.staticGroup();
@@ -99,7 +106,8 @@ function create ()
     cursors = this.input.keyboard.createCursorKeys();
 }
     function update ()
-    {if (cursors.left.isDown)
+    {
+        if (cursors.left.isDown)
 {
     player.setVelocityX(-160);
 
