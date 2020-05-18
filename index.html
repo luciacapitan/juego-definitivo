@@ -40,10 +40,9 @@
     this.load.image('plx-3', 'fondo/plx-3.png');
     this.load.image('plx-4', 'fondo/plx-4.png');
     this.load.image('plx-5', 'fondo/plx-5.png');
-    this.load.spritesheet('platform', 
-        'assets/platform.png',
-        { frameWidth: 32, frameHeight: 48 }
-        );
+    this.load.image('platform','assets/platform.png');
+    this.load.image('suelo','assets/suelo.png');
+       
     this.load.spritesheet('personaje', 
         'assets/personaje.png',
         { frameWidth: 24, frameHeight: 20, endFrame:24 }
@@ -66,15 +65,22 @@ function create ()
     image4.setScale(2.8, 2.8);
     var image5 = this.add.image(400, 300, 'plx-5');
     image5.setScale(2.8, 2.8);
+     var image6 = this.add.image(400, 300, 'suelo');
+    image5.setScale(2.8, 2.8);
+ 
 
 
     platforms = this.physics.add.staticGroup();
 
     platforms.create(400, 568, 'platform').setScale(2).refreshBody();
+    /*
 
     platforms.create(600, 400, 'platform');
     platforms.create(50, 250, 'platform');
     platforms.create(750, 220, 'platform');
+    */
+
+    platforms.create(600, 400, 'suelo');
 
     var image6 = player = this.physics.add.sprite(100, 450, 'personaje');image6.setScale(2.5, 2.5);
    
