@@ -48,6 +48,10 @@
         'assets/personaje.png',
         { frameWidth: 24, frameHeight: 20, endFrame:24 }
         );
+     this.load.spritesheet('personaje2', 
+        'assets/personaje2.png',
+        { frameWidth: 24, frameHeight: 20, endFrame:24 }
+        );
     
         
     }
@@ -66,7 +70,7 @@ function create ()
     image4.setScale(2.8, 2.8);
     var image5 = this.add.image(400, 300, 'plx-5');
     image5.setScale(2.8, 2.8);
-     var image6 = this.add.image(400, 300, 'suelo');
+     var image6 = this.add.image(200, 220, "platform");
     
  
 
@@ -78,15 +82,15 @@ function create ()
   
     /*
 
-    platforms.create(600, 400, 'suelo');
-    platforms.create(50, 250, 'sueloG');
-    platforms.create(750, 220, 'suelo');
+    platforms.create(600, 400, 'platform');
+    platforms.create(50, 250, 'platform');
+    platforms.create(750, 220, 'platform');
     */
 
-    platforms.create(600, 400, 'suelo');
+    platforms.create(600, 400, 'platform');
 
     var image6 = player = this.physics.add.sprite(100, 450, 'personaje');image6.setScale(2.5, 2.5);
-   
+    var image7 = player = this.physics.add.sprite(100, 450, 'personaje2');image6.setScale(2.5, 2.5);
 
     player.setBounce(0.2);
     player.setCollideWorldBounds(true);
@@ -94,7 +98,7 @@ function create ()
 
      this.anims.create({
             key: 'left',
-            frames: this.anims.generateFrameNumbers('personaje', { start: 0, end: 3 }),
+            frames: this.anims.generateFrameNumbers('personaje2', { start: 0, end: 3 }),
             frameRate: 10,
             repeat: -1
         });
