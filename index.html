@@ -14,6 +14,11 @@
 
 <script type="text/javascript">
 
+    var player;
+    var platforms;
+    var cursors;
+
+
     var config = {
        type: Phaser.AUTO,
     width: 800,
@@ -21,7 +26,7 @@
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 100 },
+            gravity: { y: 500 },
             debug: false
         }
     },
@@ -56,10 +61,11 @@
         
     }
     
-    var platforms;
+    
 
 function create ()
 {
+
     var image1 = this.add.image(400, 300, 'plx-1');
     image1.setScale(2.8, 2.8);
     var image2 = this.add.image(400, 300, 'plx-2');
@@ -70,32 +76,27 @@ function create ()
     image4.setScale(2.8, 2.8);
     var image5 = this.add.image(400, 300, 'plx-5');
     image5.setScale(2.8, 2.8);
-     var image6 = this.add.image(200, 220, "platform");
+    this.add.image(200, 220, "platform");
     
- 
 
+    
 
     platforms = this.physics.add.staticGroup();
-
-   
     platforms.create(490, 590, 'sueloG').setScale(1).refreshBody();
-  
-    /*
-
     platforms.create(600, 400, 'platform');
-    platforms.create(50, 250, 'platform');
+    /*
+    platforms.create(600, 400, 'platform');
     platforms.create(750, 220, 'platform');
     */
 
-    platforms.create(600, 400, 'platform');
-
-    var image6 = player = this.physics.add.sprite(100, 450, 'personaje', "personaje2");image6.setScale(2.5, 2.5);
+    var image6 = player = this.physics.add.sprite(100, 450, 'personaje', "personaje2");
+    image6.setScale(2.5, 2.5);
     
 
     player.setBounce(0.2);
     player.setCollideWorldBounds(true);
-    this.physics.add.collider(player, platforms);
 
+  
      this.anims.create({
             key: 'left',
             frames: this.anims.generateFrameNumbers('personaje2', { start: 0, end: 3 }),
@@ -116,33 +117,38 @@ function create ()
             repeat: -1
         });
 
+    this.physics.add.collider(player, platforms);
     cursors = this.input.keyboard.createCursorKeys();
+   
 }
-    function update ()
-    {
-        if (cursors.left.isDown)
+    function update()
+    {if (cursors.left.isDown)
 {
     player.setVelocityX(-160);
-
     player.anims.play('left', true);
 }
 else if (cursors.right.isDown)
 {
     player.setVelocityX(160);
-
     player.anims.play('right', true);
-}
+        }
 else
 {
     player.setVelocityX(0);
-
     player.anims.play('turn');
 }
 
-if (cursors.up.isDown && player.body.touching.down)
+if (cursors.up.isDown)
 {
-    player.setVelocityY(-330);
+    player.setVelocityY(-100);
+    player.anims.play('up', true)
 }
+
+else if (cursors.down.isDown)
+{
+    player.setVelocityY(300);
+    player.anims.play('down', true);
+        }
     }
 
 </script>
