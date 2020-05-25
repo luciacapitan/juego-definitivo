@@ -85,10 +85,11 @@ function create ()
     
     platforms = this.physics.add.staticGroup();
 
+    platforms.create(490, 580, 'sueloG');
     platforms.create(100, 300, 'platform');
     platforms.create(600, 470, 'platform');
     platforms.create(718, 220, 'platform');
-  
+    
    
 
     var image6 = player = this.physics.add.sprite(100, 450, 'personaje', "personaje2");
@@ -140,7 +141,7 @@ else
     player.anims.play('turn');
 }
 
-if (cursors.up.isDown)
+if (cursors.up.isDown && player.body.touching.down)
 {
     player.setVelocityY(-450);
     player.anims.play('up', true)
