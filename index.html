@@ -17,6 +17,7 @@
     var player;
     var platforms;
     var cursors;
+    var cherries;
 
 
     var config = {
@@ -57,7 +58,10 @@
         'assets/personaje2.png',
         { frameWidth: 24, frameHeight: 20, endFrame:24 }
         );
-    
+    this.load.spritesheet('cherry', 
+        'assets/cherry.png',
+        { frameWidth: 20, frameHeight: 20, endFrame:5 }
+        );
         
     }
     
@@ -76,7 +80,7 @@ function create ()
     image4.setScale(2.8, 2.8);
     var image5 = this.add.image(400, 300, 'plx-5');
     image5.setScale(2.8, 2.8);
-   
+  
     
     
     platforms = this.physics.add.staticGroup();
@@ -116,8 +120,22 @@ function create ()
             repeat: -1
         });
 
+    cherries = this.physics.add.group({
+    key: 'cherry',
+    repeat: 11,
+    setXY: { x: 12, y: 0, stepX: 70 }
+});
+
+stars.children.iterate(function (child) {
+
+    child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+
+});
+
     this.physics.add.collider(player, platforms);
+    this.physics.add.collider(cherries, platforms);
     cursors = this.input.keyboard.createCursorKeys();
+    this.physics.add.overlap(player, cherries, collectCherry, null, this);
    
 }
     function update()
