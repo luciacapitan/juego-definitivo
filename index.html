@@ -18,7 +18,9 @@
     var platforms;
     var cursors;
     var cherries;
-
+    var score = 0;
+    var scoreText;
+    var collectCherries;
 
     var config = {
        type: Phaser.AUTO,
@@ -120,24 +122,28 @@ function create ()
             repeat: -1
         });
 
-    cherries = this.physics.add.group({
-    key: 'cherry',
-    repeat: 11,
-    setXY: { x: 12, y: 0, stepX: 70 }
+         cherries = this.physics.add.group({
+           key: 'cherry',
+           repeat: 11,
+           setXY: { x: 12, y: 0, stepX: 70 }
 });
 
-cherries.children.iterate(function (child) {
+         cherries.children.iterate(function (child) {
 
-    child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+         child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
 
 });
 
     this.physics.add.collider(player, platforms);
     this.physics.add.collider(cherries, platforms);
     cursors = this.input.keyboard.createCursorKeys();
-    this.physics.add.overlap(player, cherries, collectCherry, null, this);
-   
-}
+    this.physics.add.overlap(player, cherries, collectCherries, null, this);
+
+    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+    }
+
+
+
     function update()
     {if (cursors.left.isDown)
 {
@@ -161,6 +167,15 @@ if (cursors.up.isDown && player.body.touching.down)
     player.anims.play('up', true)
 }
 
+
+
+ function collectCherries (player, cherries)
+{
+     cherries.disableBody(true, true);
+
+    score += 10;
+    scoreText.setText('Score: ' + score);
+}
     }
 
 </script>
