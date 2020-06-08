@@ -148,7 +148,36 @@ function create ()
 
 
 
-    function collectCherries (player, cherries)
+ }
+
+
+
+    function update()
+    {if (cursors.left.isDown)
+{
+    player.setVelocityX(-160);
+    player.anims.play('left', true);
+}
+else if (cursors.right.isDown)
+{
+    player.setVelocityX(160);
+    player.anims.play('right', true);
+        }
+else
+{
+    player.setVelocityX(0);
+    player.anims.play('turn');
+}
+
+if (cursors.up.isDown && player.body.touching.down)
+{
+    player.setVelocityY(-450);
+    player.anims.play('up', true)
+}
+
+}
+
+       function collectCherries (player, cherries)
 {
      cherries.disableBody(true, true);
 
@@ -183,32 +212,6 @@ function create ()
     gameOver = true;
     }
 
-
-
-    function update()
-    {if (cursors.left.isDown)
-{
-    player.setVelocityX(-160);
-    player.anims.play('left', true);
-}
-else if (cursors.right.isDown)
-{
-    player.setVelocityX(160);
-    player.anims.play('right', true);
-        }
-else
-{
-    player.setVelocityX(0);
-    player.anims.play('turn');
-}
-
-if (cursors.up.isDown && player.body.touching.down)
-{
-    player.setVelocityY(-450);
-    player.anims.play('up', true)
-}
-
-}
 
 </script>
 
