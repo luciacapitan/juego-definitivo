@@ -68,7 +68,7 @@
 
      this.load.spritesheet('aguila', 
         'assets/aguila.png',
-        { frameWidth: 20, frameHeight: 20, endFrame:1 }
+        { frameWidth: 34, frameHeight: 40, endFrame:4 }
         );
     }
     
@@ -175,9 +175,8 @@ if (cursors.up.isDown && player.body.touching.down)
     player.anims.play('up', true)
 }
 
-}
 
-       function collectCherries (player, cherries)
+        function collectCherries (player, cherries)
 {
      cherries.disableBody(true, true);
 
@@ -192,25 +191,30 @@ if (cursors.up.isDown && player.body.touching.down)
 
         var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
 
-        var aguila = aguilas.create(x, 16, 'aguila');
-        aguila.setBounce(1);
-        aguila.setCollideWorldBounds(true);
-        aguila.setVelocity(Phaser.Math.Between(-200, 200), 20);
+       
 
     }
     }
-
-    aguila = this.physics.add.group();
-    this.physics.add.collider(aguila, platforms);
-    this.physics.add.collider(player, aguila, hitAg, null, this);
-
-    function hitAg (player, aguila)
+ function hitAg (player, aguila)
 {
     this.physics.pause();
     player.setTint(0xff0000);
     player.anims.play('turn');
     gameOver = true;
     }
+
+}
+
+     var aguila = aguilas.create(x, 16, 'aguila');
+        aguila.setBounce(1);
+        aguila.setCollideWorldBounds(true);
+        aguila.setVelocity(Phaser.Math.Between(-200, 200), 20)   
+
+    aguila = this.physics.add.group();
+    this.physics.add.collider(aguila, platforms);
+    this.physics.add.collider(player, aguila, hitAg, null, this);
+
+   
 
 
 </script>
