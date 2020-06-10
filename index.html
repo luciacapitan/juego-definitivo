@@ -22,7 +22,8 @@
     var gameOver = false;
     var scoreText;
     var collectCherries;
-    var hitAg;
+    var aguila;
+    var hitAguila;
 
     var config = {
        type: Phaser.AUTO,
@@ -65,11 +66,6 @@
     this.load.spritesheet('cherry', 
         'assets/cherry.png',
         { frameWidth: 20, frameHeight: 20, endFrame:5 }
-        );
-
-     this.load.spritesheet('aguila', 
-        'assets/aguila.png',
-        { frameWidth: 34, frameHeight: 40, endFrame:4 }
         );
     }
     
@@ -128,28 +124,32 @@ function create ()
             repeat: -1
         });
 
-         cherries = this.physics.add.group({
-           key: 'cherry',
-           repeat: 11,
-           setXY: { x: 12, y: 0, stepX: 70 }
+cherries = this.physics.add.group({
+    key: 'cherry',
+    repeat: 11,
+    setXY: { x: 12, y: 0, stepX: 70 }
 });
 
-         cherries.children.iterate(function (child) {
+cherries.children.iterate(function (child) {
 
-         child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+    child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
 
 });
+
+
 
     this.physics.add.collider(player, platforms);
     this.physics.add.collider(cherries, platforms);
+    aguila = this.physics.add.group();
+    this.physics.add.collider(aguila, platforms);
+    this.physics.add.collider(player, aguila, hitAguila, null, this);
     cursors = this.input.keyboard.createCursorKeys();
     
     scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
 
-    aguila = this.physics.add.group();
-    this.physics.add.collider(aguila, platforms);
+  
     this.physics.add.overlap(player, cherries, collectCherries, null, this);
-    this.physics.add.collider(player, aguila, hitAg, null, this);
+  
  }
 
 
@@ -166,7 +166,7 @@ function create ()
 {
     player.setVelocityX(-160);
     player.anims.play('left', true);
-}
+} 
 else if (cursors.right.isDown)
 {
     player.setVelocityX(160);
@@ -184,41 +184,18 @@ if (cursors.up.isDown && player.body.touching.down)
     player.anims.play('up', true)
 }
 
+
+
 }
+    }
 
 function collectCherries (player, cherries)
 {
-     cherries.disableBody(true, true);
-     score += 10;
-     scoreText.setText('Score: ' + score);
+    cherries.disableBody(true, true);
 
-     if (cherries.countActive(true) === 0)
-    {
-        cherries.children.iterate(function (child) {
-            child.enableBody(true, child.x, 0, true, true);
-        });
-
-        var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
-
-        var aguila = aguilas.create(x, 16, 'aguila');
-        aguila.setBounce(1);
-        aguila.setCollideWorldBounds(true);
-        aguila.setVelocity(Phaser.Math.Between(-200, 200), 20);
-        aguila.allowGravity = false;
-    }
+    score += 10;
+    scoreText.setText('Score: ' + score);
 }
-}
-  
-
-    function hitAg (player, aguila)
-{
-    this.physics.pause();
-    player.setTint(0xff0000);
-    player.anims.play('turn');
-    gameOver = true;
-}
-
-
 </script>
 
 </body>
